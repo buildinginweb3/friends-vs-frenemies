@@ -65,8 +65,9 @@ Elites spike excitement with bonus XP/RF. Stragglers get hunted, never waited on
 | Tap / click | Tap-to-move in MANUAL and at HOME; poke your Friend at home |
 | AUTO / MAN chip | Toggle auto-pilot anytime (persisted preference) |
 | AFK button (home) | Toggle AFK: idle production + turret auto-defense trickle |
-| Space | BLAST — damage + knock back (cooldown reduced by gear/upgrades) |
-| E | Secondary ability (dash/nova/barrier/strike/overdrive when unlocked) |
+| Space | Ability slot 1: Friend Blast — damage + knock back (cooldown reduced by gear/upgrades) |
+| Q / E | Ability slots 2–3: unlocked powers (Blast + up to 2; R mirrors slot 3) |
+| Z / X / C / V | Item belt: use the first four owned consumables in fixed order |
 | 1 / 2 / 3 | Pick a level-up upgrade (abilities appear as choices too) |
 | H | Collision + performance debug overlay (development) |
 | M | Mute toggle |

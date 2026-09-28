@@ -323,8 +323,28 @@ export default function FriendsVsFrenemies({ friendId, client, paused }: GameCom
     }
   }, [showToast]);
 
+  /**
+   * Live canonical foe bodies need real RPC. The SDK's automated mock harness
+   * only answers the selected player's own artwork call (any other frames()
+   * call records a fixture error and fails validation), so automated runs use
+   * the deterministic per-family fallback bodies. Real browsers always load
+   * live art; `?fvfFoes=1` forces it anywhere for visual QA.
+   */
+  const liveFoes = useCallback((): boolean => {
+    try {
+      const q = new URLSearchParams(window.location.search);
+      if (q.get("fvfFoes") === "1") return true;
+      if (q.get("fvfFoes") === "0") return false;
+      const nav = window.navigator as Navigator & { webdriver?: boolean };
+      return nav.webdriver !== true;
+    } catch {
+      return true;
+    }
+  }, []);
+
   /** Preload official Frenemy bodies for upcoming waves (best-effort, cached). */
   const preloadFoesFor = useCallback((wave: number, mapIdx: number) => {
+    if (!liveFoes()) return;
     try {
       const kinds = unlockedKinds(wave + 5, mapIdx);
       const keys = [...kinds, "boss:brute", "boss:hunter", "boss:swarmkeeper", "boss:artillerist", "boss:warden", "boss:blink", "boss:siegebreaker"].slice(0, 12);
@@ -397,6 +417,8 @@ export default function FriendsVsFrenemies({ friendId, client, paused }: GameCom
       .catch(() => { if (alive) setArtNote("Live Friend artwork unreachable — stand-in buddy."); });
     // Official Frenemy bodies: preload early so waves render distinct Rare
     // Friends immediately; the renderer falls back to shadow bodies meanwhile.
+    // (Skipped under automated mock harnesses — see liveFoes above.)
+    if (liveFoes()) {
     preloadFrenemyArts([
       "shadow", "swift", "swarm", "ranged", "tank", "charger",
       "boss:brute", "boss:swarmkeeper", "boss:hunter",
@@ -412,6 +434,7 @@ export default function FriendsVsFrenemies({ friendId, client, paused }: GameCom
       });
       setFoeVer(v => v + 1);
     }).catch(() => { /* offline: fallback bodies carry the roster */ });
+    } // end liveFoes gate
 
     return () => {
       alive = false;

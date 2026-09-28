@@ -7983,6 +7983,8 @@ function updateTactical(run, e, dt, fx, fy, dist, speed) {
         e.burrowT = 0.5;
         e.x = Math.min(WORLD_W - 14, Math.max(14, e.burrowX));
         e.y = Math.min(WORLD_H - 14, Math.max(14, e.burrowY));
+        e.px = e.x;
+        e.py = e.y;
         burst(run, e.x, e.y, "#8a7a5a", 14);
         if (Math.hypot(fx - e.x, fy - e.y) < 40 + FRIEND_BODY) hurtFriend(run, e.dmg);
       }
@@ -8495,6 +8497,8 @@ function requestRoute(run, e, goal, fallback) {
       const spot = validatedSpawn(run);
       e.x = spot[0];
       e.y = spot[1];
+      e.px = e.x;
+      e.py = e.y;
       e.waypoints = [];
       e.stuckFails = 0;
       e.repathT = 0.5;
@@ -9768,6 +9772,8 @@ function updateBlink(run, e, dt, fx, fy, dist, speed) {
       burst(run, e.x, e.y, "#7a5fc0", 10);
       e.x = nx;
       e.y = ny;
+      e.px = nx;
+      e.py = ny;
       e.waypoints = [];
       e.repathT = 0;
       burst(run, e.x, e.y, "#7a5fc0", 10);
@@ -10033,14 +10039,22 @@ function pushApart(run, a, b, dt) {
   const d2 = dx2 * dx2 + dy2 * dy2;
   if (d2 > 0.01 && d2 < min * min) {
     const d = Math.sqrt(d2);
-    const push = (min - d) / d * 3 * dt;
-    const nav = run.scene.navigator;
+    const overlap = min - d;
+    const push = overlap / d * 3 * dt;
     const anx = a.x - dx2 * push, any = a.y - dy2 * push;
+    const bnx = b.x + dx2 * push, bny = b.y + dy2 * push;
+    if (overlap < 4) {
+      a.x = anx;
+      a.y = any;
+      b.x = bnx;
+      b.y = bny;
+      return;
+    }
+    const nav = run.scene.navigator;
     if (nav.segmentClear([a.x, a.y], [anx, any])) {
       a.x = anx;
       a.y = any;
     }
-    const bnx = b.x + dx2 * push, bny = b.y + dy2 * push;
     if (nav.segmentClear([b.x, b.y], [bnx, bny])) {
       b.x = bnx;
       b.y = bny;
@@ -10086,6 +10100,8 @@ function watchdog(run, e, dt) {
     const spot = validatedSpawn(run);
     e.x = spot[0];
     e.y = spot[1];
+    e.px = e.x;
+    e.py = e.y;
     e.waypoints = [];
     e.stuckFails = 0;
     run.stuckFixes++;
@@ -12205,7 +12221,7 @@ function drawDebug(ctx, run, perf) {
     ctx.textAlign = "left";
     ctx.font = "bold 11px ui-monospace,Menlo,Consolas,monospace";
     const deg = (run.aimAngle * 180 / Math.PI + 360) % 360;
-    ctx.fillText(`aim ${deg.toFixed(1)}\xB0 face ${run.aimFace}${run.aimMode === "mouse" ? " mouse" : " auto"}`, ax + 8, ay - 8);
+    ctx.fillText(`aim ${deg.toFixed(1)}deg face ${run.aimFace}${run.aimMode === "mouse" ? " mouse" : " auto"}`, ax + 8, ay - 8);
     ctx.textAlign = "center";
   }
   ctx.restore();
