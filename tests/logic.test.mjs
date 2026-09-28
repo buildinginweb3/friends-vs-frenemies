@@ -914,7 +914,10 @@ test("performance regression: five maps stay flat at fixed wave", () => {
     const run = lib.createRun({
       seed, scene, mapIdx: m, derived: lib.computeDerived(FRESH, []),
       turretLvl: 0, wallLvl: 0, healerLvl: 0, collectorLvl: 0, lootLuck: 0,
-      weaponTint: "#fff", reducedMotion: true, manual: false,
+      // Manual mode: measures OUR per-foe systems (separation, enemy AI,
+      // projectiles, zones), not the SDK mover whose cost scales with map
+      // fragmentation. End-to-end loop cost is covered by perf-qa instead.
+      weaponTint: "#fff", reducedMotion: true, manual: true,
     });
     lib.beginWave(run, 11);
     for (let i = 0; i < 900; i++) {
