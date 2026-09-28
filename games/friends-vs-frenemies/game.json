@@ -1,0 +1,10 @@
+{
+  "name": "FRIENDS vs FRENEMIES",
+  "consumable": "Shadow Bounty",
+  "price": "1000000000000000000",
+  "outcomes": [
+    { "name": "Shadow wisp", "chanceBps": 6000, "reward": "500000000000000000" },
+    { "name": "Frenemy trophy", "chanceBps": 3000, "reward": "1000000000000000000" },
+    { "name": "Boss crown", "chanceBps": 1000, "reward": "3000000000000000000" }
+  ]
+}

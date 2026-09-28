@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "skills": {
+    "game-asset-pipeline": {
+      "source": "shipshitgames/skills",
+      "sourceType": "github",
+      "skillPath": "skills/game-asset-pipeline/SKILL.md",
+      "computedHash": "f981f97dd8e3155e5cff13f15cd7b254bc4f16c4b9afc09ac1985f17229e54e8"
+    },
+    "isometric-3d": {
+      "source": "shipshitgames/skills",
+      "sourceType": "github",
+      "skillPath": "skills/isometric-3d/SKILL.md",
+      "computedHash": "0eee1f414f4bff5fc139a5887839e21c784484e8c248e5081d9b689d9d873bf9"
+    },
+    "playwright-game-testing": {
+      "source": "shipshitgames/skills",
+      "sourceType": "github",
+      "skillPath": "skills/playwright-game-testing/SKILL.md",
+      "computedHash": "635d0e85ca4b44c0cf14b8298f0419c98bf6a3cb0b1d0a048e07a4ba48b7c767"
+    },
+    "sprite-animation-gyms": {
+      "source": "shipshitgames/skills",
+      "sourceType": "github",
+      "skillPath": "skills/sprite-animation-gyms/SKILL.md",
+      "computedHash": "fcbc5525a83966977a767f10f54f15dab2a3c437d00385698d3ffb8487ec853d"
+    },
+    "vibe-game-workflow": {
+      "source": "shipshitgames/skills",
+      "sourceType": "github",
+      "skillPath": "skills/vibe-game-workflow/SKILL.md",
+      "computedHash": "66ef1ba08051ab9ae055e9ca02e0ba7f9eaafe2088c68259c13d8de66957befb"
+    }
+  }
+}

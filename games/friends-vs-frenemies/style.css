@@ -1,0 +1,206 @@
+/* FRIENDS vs FRENEMIES — Rare Friends pixel-tamagotchi visual language.
+   Paper + ink + chunky borders + hard shadows + checker inlays.
+   Display headings use a pixel-styled stack; body stays highly readable. */
+.fvf{position:relative;width:100%;height:100%;overflow:hidden;background:#e8e4d4;color:#141414;font:13px/1.45 "Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif}
+.fvf h2,.fvf .fvf-defend,.fvf .fvf-primary{font-family:"Press Start 2P",ui-monospace,Menlo,Consolas,monospace;letter-spacing:.5px}
+.fvf button{font:inherit;cursor:pointer;border:2px solid #141414;border-radius:0;padding:8px 12px;background:#f4f1e6;color:#141414;min-height:44px;box-shadow:2px 2px 0 #141414,inset 0 2px 0 rgba(255,255,255,.55)}
+.fvf button:disabled{opacity:.45;cursor:default;box-shadow:none}
+.fvf button:not(:disabled):active{transform:translate(1px,1px);box-shadow:1px 1px 0 #141414}
+.fvf button:focus-visible,.fvf canvas:focus-visible{outline:3px solid #5da24a;outline-offset:2px}
+.fvf-fine{font-size:11px;opacity:.75}
+.fvf-loading{height:100%;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;text-align:center;padding:24px;background:#e8e4d4}
+.fvf-loading h2{margin:0}
+
+/* World-first layout: canvas fills the frame, UI floats in corners. */
+.fvf-world{position:absolute;inset:0}
+.fvf-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;background:#e8e4d4;touch-action:manipulation;image-rendering:pixelated}
+.fvf-worldloading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#e8e4d4;z-index:5}
+
+/* Compact corner chips — the world stays visible. */
+.fvf-chips{position:absolute;top:8px;left:8px;right:8px;display:flex;gap:6px;align-items:flex-start;z-index:2;pointer-events:none}
+.fvf-chip{background:rgba(244,241,230,.94);border:2px solid #141414;padding:4px 10px;font-size:12px;font-weight:700;box-shadow:2px 2px 0 #141414}
+.fvf-chip:first-child{margin-right:auto}
+.fvf-chip:last-child{margin-left:auto;margin-right:0}
+/* Cohesive game HUD: single pixel plate, not detached boxes. */
+.fvf-hud{position:absolute;top:8px;left:8px;right:8px;display:flex;gap:0;align-items:stretch;z-index:2;pointer-events:none;background:rgba(244,241,230,.96);border:3px solid #141414;box-shadow:4px 4px 0 #141414}
+.fvf-hudseg{display:flex;align-items:center;gap:6px;padding:5px 10px;font-size:12px;font-weight:700;border-right:2px solid #141414;white-space:nowrap}
+.fvf-hudseg:last-child{border-right:0;margin-left:auto}
+.fvf-hudmain{flex:1;justify-content:center;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.fvf-hudmode{pointer-events:auto;background:#141414;color:#f4f1e6;border:0;border-right:2px solid #141414;font-weight:800;min-height:0;padding:5px 12px}
+.fvf-hudwarn{background:#f2d3cd}
+.fvf-hudafk{background:#dcebc0}
+.fvf-h2pix{display:inline-flex;vertical-align:-3px;margin-right:6px}
+.fvf-xp{position:relative;overflow:hidden;min-width:150px;text-align:center}
+.fvf-xp i{position:absolute;left:0;top:0;bottom:0;width:0;background:#8fc41c;opacity:.55}
+.fvf-xp b{position:relative;display:flex;align-items:center;gap:4px;justify-content:center}
+.fvf-hpbar{position:relative;display:block;width:90px;height:6px;background:#d8d2ba;border:1px solid #141414;margin-left:6px}
+.fvf-hpbar i{position:absolute;left:0;top:0;bottom:0;background:#5da24a}
+
+/* Home bottom bar: one hero button + small square companions. */
+/* Home bottom bar: raised above the runtime's bottom-corner overlays. */
+.fvf-homebar{position:absolute;left:50%;transform:translateX(-50%);bottom:60px;display:flex;gap:8px;z-index:2;background:rgba(244,241,230,.96);border:3px solid #141414;box-shadow:4px 4px 0 #141414;padding:6px}
+.fvf-defend{background:#8fc41c;font-weight:800;font-size:16px;padding:12px 26px;border-width:3px}
+.fvf-icon{min-width:52px;font-size:11px;font-weight:700;background:rgba(244,241,230,.94);display:flex;align-items:center;gap:4px;justify-content:center}
+.fvf-iconon{background:#dcebc0 !important}
+/* Ability dock: pixel icons + key + cooldown sweep.
+   Compact fit: keycap shrinks, label ellipsizes, nothing touches edges. */
+.fvf-ab{display:flex !important;flex-direction:column;align-items:center;gap:2px;padding-left:1px !important;padding-right:1px !important}
+.fvf-abkey{display:flex;align-items:center;gap:2px;font-size:9px;font-weight:800;max-width:100%}
+.fvf-abkey .fvf-key{font-size:8px;min-width:0;padding:0 3px;margin-right:0;white-space:nowrap}
+.fvf-ablabel{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;line-height:1.5;min-width:0}
+/* Level-up reward cards: rich pixel cards, not browser boxes. */
+.fvf-lvcard{position:relative;padding-top:18px !important}
+.fvf-lvnum{position:absolute;top:4px;left:6px;font-size:10px;font-weight:800;background:#141414;color:#f4f1e6;padding:1px 6px}
+.fvf-lvrar{font-size:10px;font-weight:800;color:#7a5fc0;letter-spacing:1px}
+/* Tutorial + AFK + synergy + build-inspect presentation. */
+.fvf-tut{max-width:560px}
+.fvf-tuthint{position:absolute;bottom:120px;left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:8px;align-items:center;background:rgba(244,241,230,.97);border:2px solid #141414;box-shadow:3px 3px 0 #141414;padding:6px 10px;font-size:12px;font-weight:700;max-width:92%}
+.fvf-tuthint button{min-height:32px;padding:2px 8px}
+.fvf-afk{max-width:480px}
+.fvf-synrow{display:flex;gap:6px;flex-wrap:wrap}
+.fvf-synchip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;background:#dcebc0;border:2px solid #141414;padding:2px 8px}
+.fvf-bld{align-items:flex-start !important}
+.fvf-cat{font-size:10px;font-weight:800;background:#e8e4d4;border:1px solid #141414;padding:0 5px;margin-left:4px}
+.fvf-inspect{display:flex;flex-direction:column;gap:4px;margin-top:4px;background:#f4f1e6;border:1px dashed #141414;padding:4px 6px}
+.fvf-speclist{display:flex;gap:4px;flex-wrap:wrap}
+.fvf-speclist button{min-height:32px;padding:2px 6px;font-size:11px}
+.fvf-speclist button.on{background:#141414;color:#f4f1e6}
+.fvf-bldbtns{display:flex;flex-direction:column;gap:4px}
+.fvf-bldbtns button{min-height:36px;white-space:nowrap}
+
+/* Slim dock on the right edge, clear of runtime overlays. */
+.fvf-dock{position:absolute;right:8px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:2;width:64px}
+.fvf-dock button{min-height:48px;font-size:11px;font-weight:700;padding:6px 2px;background:rgba(244,241,230,.94)}
+.fvf-blast{background:#e8c53a !important}
+
+/* Overlay sheet: translucent paper, world visible around it. */
+.fvf-sheet{position:absolute;top:48px;right:8px;bottom:76px;width:300px;max-width:82%;background:rgba(244,241,230,.97);border:2px solid #141414;box-shadow:4px 4px 0 #141414;z-index:3;display:flex;flex-direction:column}
+.fvf-sheet-head{display:flex;align-items:center;gap:6px;padding:8px;border-bottom:2px solid #141414}
+.fvf-tabs{display:flex;gap:4px;flex:1}
+.fvf-tabs button{min-height:36px;padding:4px 8px;font-size:11px;box-shadow:none}
+.fvf-tabs button.on{background:#141414;color:#f4f1e6}
+.fvf-x{min-width:40px;box-shadow:none}
+.fvf-sheet-body{overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:8px}
+.fvf-up{display:flex;gap:8px;align-items:center;background:#fff;border:2px solid #141414;padding:6px 8px;box-shadow:2px 2px 0 #141414}
+.fvf-up>div{flex:1;min-width:0}
+.fvf-up strong{display:block;font-size:12px}
+.fvf-up strong em{color:#5d7a1e;font-style:normal}
+.fvf-up small{display:block;font-size:10px;opacity:.7}
+.fvf-up button{white-space:nowrap;min-height:40px;box-shadow:none}
+.fvf-pips{display:flex;gap:3px;margin-top:4px}
+.fvf-pips i{width:12px;height:6px;background:#d8d2ba}
+.fvf-pips i.on{background:#5da24a}
+.fvf-gear{display:flex;flex-direction:column;gap:8px}
+.fvf-gearslot{background:#fff;border:2px solid #141414;padding:6px 8px;box-shadow:2px 2px 0 #141414}
+.fvf-gearslot>strong{display:block;font-size:12px}
+.fvf-sheet-foot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:11px}
+.fvf-motion{display:flex;gap:6px;align-items:center}
+.fvf-motion input{width:18px;height:18px}
+.fvf-danger{background:#fff !important}
+.fvf-note{background:#fff;border:1px dashed #141414;padding:6px 8px;font-size:11px;margin:0}
+
+/* Modals + level-up cards: pixel frames with checker header inlay. */
+.fvf-modal{position:absolute;inset:0;background:rgba(20,20,20,.45);display:flex;align-items:center;justify-content:center;z-index:4;padding:12px}
+.fvf-card{background:#f4f1e6;border:3px solid #141414;box-shadow:6px 6px 0 #141414, inset 0 0 0 2px rgba(20,20,20,.08);padding:16px;max-width:520px;width:100%;max-height:100%;overflow-y:auto;text-align:center}
+.fvf-card h2{margin:-16px -16px 8px;padding:10px 8px 8px;font-size:17px;background-image:repeating-conic-gradient(#e9e2cb 0 25%, #f4f1e6 0 50%);background-size:12px 12px;border-bottom:3px solid #141414}
+.fvf-cardhead{display:flex;gap:10px;align-items:center;justify-content:center;margin-bottom:6px}
+.fvf-portrait{image-rendering:pixelated;border:2px solid #141414;background:#e8e4d4;box-shadow:2px 2px 0 #141414;flex:none}
+.fvf-sub{margin:0 0 4px}
+.fvf-offers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.fvf-offer{display:flex;flex-direction:column;gap:4px;align-items:center;min-height:110px;background-image:repeating-conic-gradient(#ffffff 0 25%, #f6f2e4 0 50%);background-size:10px 10px}
+.fvf-offer.evolved{border-color:#8a5a00;background:#f6ecd2}
+.fvf-offer strong{font-size:12px}
+.fvf-offer small{font-size:10px;opacity:.75}
+.fvf-icon-sm{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 4px;font-style:normal;font-size:15px;background:#e8e4d4;border:2px solid #141414;box-shadow:2px 2px 0 #141414}
+.fvf-offer.evolved .fvf-icon-sm{background:#e8c53a}
+.fvf-reroll{margin-top:4px}
+.fvf-primary{background:#8fc41c;font-weight:800}
+
+/* Ability hotkeys on the dock + cooldown sweep. */
+.fvf-dock button{position:relative;overflow:hidden}
+.fvf-key{display:inline-block;min-width:22px;margin-right:4px;padding:0 4px;border:1.5px solid #141414;background:#141414;color:#f4f1e6;font-size:9px;font-weight:800;border-radius:3px}
+.fvf-blast .fvf-key{background:#141414;color:#e8c53a}
+.fvf-cd{position:absolute;left:0;bottom:0;top:auto;height:4px;background:#5da24a;opacity:.8}
+.fvf-icon-sm{font-style:normal;opacity:.8}
+.fvf-syn{display:block;margin-top:2px;color:#5d7a1e;font-weight:700}
+.fvf-shopitem.fvf-ability{border-color:#7a5fc0;background:#efe8fb}
+.fvf-shopitem.fvf-relic{border-color:#8a5a00;background:#f6ecd2}
+.fvf-offer small.fvf-syn{color:#5d7a1e}
+
+/* Toasts: pixel plates, never full-screen. */
+.fvf-toast{position:absolute;top:48px;left:50%;transform:translateX(-50%);z-index:6;background:#f4f1e6;border:3px solid #141414;box-shadow:4px 4px 0 #141414;padding:8px 14px;text-align:center;max-width:88%}
+.fvf-toast strong{display:block;font-size:13px}
+.fvf-toast small{display:block;font-size:11px;opacity:.75}
+
+/* Sheet header checker inlay + section titles. */
+.fvf-sheet-head{background-image:repeating-conic-gradient(#e9e2cb 0 25%, #f4f1e6 0 50%);background-size:12px 12px;border-bottom:3px solid #141414}
+.fvf-gearslot>strong{display:flex;align-items:center;gap:8px}
+.fvf-chips .fvf-chip{border-width:2px}
+
+/* Trader shop + build inspector. */
+.fvf-shop{max-width:560px}
+.fvf-shop h2{letter-spacing:1px}
+.fvf-level h2{letter-spacing:1px}
+.fvf-card{image-rendering:pixelated}
+.fvf-offer{border-image:none}
+.fvf-gearslot small{display:block;font-size:10px;opacity:.75;margin-top:2px}
+.fvf-stock{display:flex;flex-direction:column;gap:8px;margin:10px 0;max-height:46vh;overflow-y:auto}
+.fvf-shopitem{display:flex;gap:8px;align-items:center;background:#fff;border:2px solid #141414;border-left-width:7px;padding:8px 10px 8px 6px;box-shadow:2px 2px 0 #141414}
+.fvf-shopitem>div{flex:1;min-width:0}
+.fvf-shopitem strong{display:block;font-size:13px}
+.fvf-shopitem small{display:block;font-size:11px;opacity:.75}
+.fvf-shopitem button{white-space:nowrap;min-height:44px}
+.fvf-itic{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;flex:none;font-size:17px;font-weight:800;color:#f4f1e6;background:#141414;border:2px solid #141414;box-shadow:2px 2px 0 #141414;vertical-align:middle}
+.fvf-pulse{animation:fvf-pulse 1.2s steps(2,jump-none) infinite}
+@keyframes fvf-pulse{0%,100%{box-shadow:2px 2px 0 #141414,inset 0 2px 0 rgba(255,255,255,.55)}50%{box-shadow:2px 2px 0 #141414,0 0 0 3px #8fc41c,inset 0 2px 0 rgba(255,255,255,.55)}}
+.fvf-diff{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.fvf-diff em{font-style:normal;font-size:10px;padding:1px 6px;border:1px solid #141414}
+.fvf-diff em.up{background:#dcebc0}
+.fvf-diff em.down{background:#f2d3cd}
+.fvf-diff em.same{background:#eee;border-style:dashed;opacity:.8}
+.fvf-modeseg{display:flex;gap:0;margin-bottom:2px}
+.fvf-modeseg button{flex:1;min-height:40px;box-shadow:none;font-size:12px;font-weight:700}
+.fvf-modeseg button.on{background:#141414;color:#f4f1e6}
+.fvf-mode{min-width:58px;pointer-events:auto;cursor:pointer}
+button.fvf-chip{font-family:inherit}
+@media (max-width:560px){
+  .fvf-shopitem{flex-direction:column;align-items:stretch;text-align:left}
+  .fvf-stock{max-height:52vh}
+  .fvf-shopitem{padding:5px 7px;gap:4px}
+  .fvf-shopitem strong{font-size:11px}
+  .fvf-shopitem small{font-size:10px}
+  .fvf-shopitem button{min-height:40px}
+  .fvf-card{padding:10px}
+  .fvf-card h2{font-size:14px;margin:-10px -10px 4px;padding:8px 6px 6px}
+}
+.fvf-results{position:absolute;inset:0;overflow-y:auto;background:#e8e4d4;padding:20px 20px 72px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
+.fvf-results h2{margin:0}
+.fvf-grid{display:grid;grid-template-columns:repeat(2,minmax(130px,200px));gap:8px;margin:0}
+.fvf-grid div{background:#f4f1e6;border:2px solid #141414;box-shadow:2px 2px 0 #141414;padding:8px}
+.fvf-grid dt{font-size:10px;opacity:.7}
+.fvf-grid dd{margin:0;font-size:17px;font-weight:800}
+.fvf-drops{width:100%;max-width:440px;display:flex;flex-direction:column;gap:8px}
+.fvf-drops h3{margin:0}
+.fvf-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+/* Small screens. */
+@media (max-width:560px){
+  .fvf{font-size:12px}
+  .fvf-chip{font-size:10px;padding:3px 6px}
+  .fvf-hud{flex-wrap:wrap}
+  .fvf-hudseg{font-size:10px;padding:4px 6px}
+  .fvf-hudseg:last-child{margin-left:0}
+  .fvf-hudmain{flex-basis:100%;border-bottom:2px solid #141414}
+  .fvf-xp{min-width:96px}
+  .fvf-sheet{top:auto;left:8px;right:8px;bottom:70px;width:auto;max-height:62%}
+  .fvf-offers{grid-template-columns:1fr}
+  .fvf-offer{min-height:0;flex-direction:row;text-align:left;justify-content:flex-start}
+  .fvf-dock{width:64px}
+  .fvf-dock button{min-height:52px;font-size:10px}
+  .fvf-defend{font-size:14px;padding:10px 18px}
+  .fvf-homebar{bottom:auto;top:52px;max-width:96vw;flex-wrap:wrap;justify-content:center}
+  .fvf-tuthint{bottom:auto;top:110px}
+}
+@media (prefers-reduced-motion:reduce){
+  .fvf button{box-shadow:none}
+}
