@@ -24,28 +24,20 @@ The selected Rare Friend remains the visual and gameplay focus throughout the en
 
 ## Playable demo
 
-**Public preview:** `https://BUILDER-PREVIEW-PLACEHOLDER` (static host of `games/friends-vs-frenemies/.friendsdk/` built from the commit below)
+**Public preview:** https://buildinginweb3.github.io/friends-vs-frenemies/ (GitHub Pages hosting of `games/friends-vs-frenemies/.friendsdk/` built from the commit below)
 
-> **PREVIEW NOTE FOR THE BUILDER:** no preview is deployed yet — deployment needs
-> a GitHub repository. Build with `npm run build`, copy the contents of
-> `games/friends-vs-frenemies/.friendsdk/` to a `gh-pages` branch (empty
-> `.nojekyll`, Pages from branch) or any static host, and replace the URL above.
-> A localhost URL is not sufficient.
 
 **Wallet/network requirements.** A browser wallet holding a hardwired Rare Friends Generations NFT (generation 1 or higher) on Robinhood mainnet (chain 4663). The SDK runtime freshly verifies ownership of the selected Friend before play; discovery/artwork alone is not enough. No RF funding and no transaction signatures are needed — the entire preview economy is simulated.
 
 ## Source code
 
-[Source code](https://github.com/BUILDER-REPO-PLACEHOLDER/friends-vs-frenemies/tree/11dcb6a6bebb4094fe47a997f00beb527fb5f988) · Final submission commit: `11dcb6a6bebb4094fe47a997f00beb527fb5f988`
+[Source code](https://github.com/buildinginweb3/friends-vs-frenemies/tree/11dcb6a6bebb4094fe47a997f00beb527fb5f988) · Final submission commit: `11dcb6a6bebb4094fe47a997f00beb527fb5f988`
 
-> **SOURCE-URL NOTE FOR THE BUILDER:** this folder is not yet pushed to GitHub.
-> Push it, replace `BUILDER-REPO-PLACEHOLDER` above with the real repository URL,
-> and keep the same commit SHA. The game cannot be judged without an accessible source repo.
 
 Use Node.js 22+ on Linux or Ubuntu/WSL2.
 
 ```sh
-git clone https://github.com/BUILDER-REPO-PLACEHOLDER/friends-vs-frenemies.git
+git clone https://github.com/buildinginweb3/friends-vs-frenemies.git
 cd friends-vs-frenemies
 git checkout 11dcb6a6bebb4094fe47a997f00beb527fb5f988
 npm ci
