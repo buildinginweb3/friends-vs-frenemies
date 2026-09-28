@@ -4,7 +4,7 @@
 
 FRIENDS VS FRENEMIES turns your owned Rare Friend into the playable hero of an evolving pixel world where you build and upgrade a home base, defend it from waves of Frenemies, unlock powers, and progress through changing territories.
 
-[Source code](https://github.com/BUILDER-REPO-PLACEHOLDER/friends-vs-frenemies/tree/b14dc6370f0f911a0096d04f45288722103697a7) · Final submission commit: `b14dc6370f0f911a0096d04f45288722103697a7`
+[Source code](https://github.com/BUILDER-REPO-PLACEHOLDER/friends-vs-frenemies/tree/0719ea340075343725bb44065008bf76af394265) · Final submission commit: `0719ea340075343725bb44065008bf76af394265`
 
 > **SOURCE-URL NOTE FOR THE BUILDER:** this folder is not yet pushed to GitHub.
 > Push it, replace `BUILDER-REPO-PLACEHOLDER` above with the real repository URL,
