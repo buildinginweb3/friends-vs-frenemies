@@ -31,7 +31,7 @@ The selected Rare Friend remains the visual and gameplay focus throughout the en
 
 ## Source code
 
-[Source code](https://github.com/buildinginweb3/friends-vs-frenemies/tree/11dcb6a6bebb4094fe47a997f00beb527fb5f988) · Final submission commit: `11dcb6a6bebb4094fe47a997f00beb527fb5f988`
+[Source code](https://github.com/buildinginweb3/friends-vs-frenemies/tree/f0d570330b51660d36875b97c1aa34a38a1dc6e4) · Final submission commit: `f0d570330b51660d36875b97c1aa34a38a1dc6e4`
 
 
 Use Node.js 22+ on Linux or Ubuntu/WSL2.
@@ -39,7 +39,7 @@ Use Node.js 22+ on Linux or Ubuntu/WSL2.
 ```sh
 git clone https://github.com/buildinginweb3/friends-vs-frenemies.git
 cd friends-vs-frenemies
-git checkout 11dcb6a6bebb4094fe47a997f00beb527fb5f988
+git checkout f0d570330b51660d36875b97c1aa34a38a1dc6e4
 npm ci
 npm run dev
 ```
