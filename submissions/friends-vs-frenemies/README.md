@@ -1,0 +1,84 @@
+# FRIENDS VS FRENEMIES
+
+**Builder:** Syrup · **Contact:** @buildinginweb3 on X · **Category:** Character Spotlight · **SDK:** FriendSDK v0.1.2
+
+FRIENDS VS FRENEMIES turns your owned Rare Friend into the playable hero of an evolving pixel world where you build and upgrade a home base, defend it from waves of Frenemies, unlock powers, and progress through changing territories.
+
+[Source code](https://github.com/BUILDER-REPO-PLACEHOLDER/friends-vs-frenemies/tree/b14dc6370f0f911a0096d04f45288722103697a7) · Final submission commit: `b14dc6370f0f911a0096d04f45288722103697a7`
+
+> **SOURCE-URL NOTE FOR THE BUILDER:** this folder is not yet pushed to GitHub.
+> Push it, replace `BUILDER-REPO-PLACEHOLDER` above with the real repository URL,
+> and use the same commit SHA. The game cannot be judged without an accessible source repo.
+
+## Playable demo
+
+**Public preview:** `https://BUILDER-PREVIEW-PLACEHOLDER` (GitHub Pages or static host of `games/friends-vs-frenemies/.friendsdk/` built from the commit above)
+
+> **PREVIEW NOTE FOR THE BUILDER:** no preview is deployed yet — deployment needs
+> a GitHub repository. Build with `npm run build`, copy the contents of
+> `games/friends-vs-frenemies/.friendsdk/` to a `gh-pages` branch (or any static
+> host), and replace the URL above. A localhost URL is not sufficient.
+
+**Wallet/network requirements.** A browser wallet holding a hardwired Rare Friends Generations NFT (generation 1 or higher) on Robinhood mainnet (chain 4663). The SDK runtime freshly verifies ownership of the selected Friend before play; discovery/artwork alone is not enough. No RF funding and no transaction signatures are needed — the entire preview economy is simulated.
+
+## How it uses Rare Friends
+
+The game uses FriendSDK's wallet and ownership flow so the player's selected owned Generations NFT becomes the main playable character. Your actual Rare Friend moves through the world, attacks with its own Friend powers (no held gun — the Friend *is* the weapon), uses abilities, builds and defends its home plot, and remains the visual and gameplay focus throughout. Enemies are corrupted Frenemies rendered as distinct official (family, seed) Rare Friend characters, never clones of your Friend. **YOUR FRIEND. YOUR LAND. ENDLESS ENEMIES.**
+
+## How do you play?
+
+Pick-a-plot home → build turrets, walls, collectors, frost spires → press DEFEND → preparation briefing (scouted encounter, repairs, launch) → survive the wave → level up (pick 1 of 3) → boss every 5 waves → Rare Trader → next territory → repeat. If the Home Core house falls, the invasion is lost (reduced rewards; the base itself is never destroyed).
+
+**Defeat:** the run ends with a results screen (waves, kills, RF earned/spent); permanent base progression is kept.
+
+**Progression is session-scoped** in the Vibeathon preview: the FriendSDK sandbox provides no persistent storage API, so reloads restart (see Known limitations). Idle/AFK production accrues only while the session (or a storage-backed host) is alive — there is no durable offline earnings claim.
+
+## Controls
+
+| Input | Action |
+| --- | --- |
+| WASD / arrows | Move in MANUAL mode (normalized diagonals) |
+| Mouse | Aim Friend powers in MANUAL desktop |
+| Tap / click | Tap-to-move in MANUAL and at HOME; poke your Friend at home |
+| AUTO / MAN chip, AFK button | Auto-pilot toggle (persisted); home AFK idle toggle |
+| Space / Q / E | Ability slots 1–3: Friend Blast + up to 2 unlocked powers (R mirrors slot 3) |
+| Z / X / C / V | Item belt: first four owned consumables in fixed order |
+| 1 / 2 / 3 | Pick a level-up upgrade |
+| H | Collision + performance debug overlay (development) |
+| M | Mute toggle |
+
+Mobile: touch buttons for abilities/items, tap-to-move, auto-aim in MANUAL touch mode.
+
+## Costs and rewards
+
+**ALL ECONOMY ACTIVITY IN THE VIBEATHON PREVIEW IS SIMULATED.** No real RF moves; no contracts; no NFT rewards.
+
+- **Start:** 0 RF·sim. Earn from kills (per-enemy RF × map/richness multipliers), wave-clear stipends (3 + 2×wave), boss purses, Collector trickle, and capped idle production (rate scales with Collector/Generator tiers; storage scales with Vault; 8-hour accrual cap; clock-skew safe).
+- **Spend:** Trader gear (15–340 by rarity/tier), ability modules (60–190), relics (~90+), consumables (Full Heal 25, Emergency Shield 30, Power Tonic 20, Lucky Token 15, Magnet Burst 18, Rare Fury 35), Trader rerolls (5 → 10 → 20), mid-run heal (5 + 5×uses, Med-Station discount), structures (e.g. Turret 40, Wall 35, Collector 45, Frost Spire 70, Ability Altar 60 — higher tiers cost more), repairs (scaled by damage).
+- **Probabilities:** boss gear drop 35% + 10% per Loot Luck (+15% wave ≥ 15, capped 90%); Trader rarity odds improve per 5-wave block and with Trader Beacon; battlefield pickups weighted RF 30 / heart 22 / haste 18 / power 18 / ward 12.
+- **Salvage:** unequipped gear salvages for 40% of value; duplicate boss drops convert to +25 RF·sim.
+
+## What have you tested?
+
+Actually run in this environment (real headless Chromium via Playwright + SDK mock harness, plus headless engine sims):
+
+- `npm run logic:test` — **58/58 pass**: 25-wave sims, economy calibration (wave-5 bank median ≈ 89), wave-template honesty, boss locomotion per pattern (no sliding), waves 1–6 full-block regression (boss → trader → map 2), ability hotkeys/slots/ranks, item belt, save-v4 migration, idle-cap exploits, encounter ceilings.
+- `npm run typecheck` — clean. `npm run build` + `friendsdk check` — valid (build ≈ 619KB).
+- `scripts/interaction-test.mjs` — 16/16 checks pass (home, plot choice, combat, prep, WASD, tap-move, AUTO, kills, level-up, Blast, build inspector, debug) at 960px and 360px.
+- `scripts/visual-qa.mjs` boss/telegraph/map suites, `render-smoke.mjs` (13 draws), `map-audit.mjs` (all 6 maps), `perf-qa.mjs` (step ≈ 1ms, render ≈ 2ms, flat across maps), DOM overflow audit at 960/390/360px — all clean.
+- Screenshots captured and inspected: home, prep briefing, combat, level-up, boss in motion, Trader, mobile view.
+
+## Known limitations
+
+- Session-scoped progression in the preview (sandbox has no storage); reload restarts. Idle/AFK accrues in-session only.
+- Live canonical Frenemy bodies need real RPC; automated mock runs render deterministic per-family fallback bodies (still distinct per archetype).
+- Real-wallet playtest (ownership gate + live sprite reads) still requires user verification — mocks cannot prove it.
+- Browser QA used headless Chromium with locally extracted system libs (no root needed).
+- Balance is tuned for starter builds; late-game (25+) difficulty is untested with maxed loadouts.
+
+## Credits
+
+- FriendSDK v0.1.2 + Rare Friends Isometric World Assets + canonical Generations sprites + sound kit (all under SDK permissions; see `node_modules/@rarefriends/friendsdk/NOTICE.md` and `assets/provenance.json`).
+- Custom Frenemy variants, structures, UI pixel system, and all game code: original to this project.
+- React, esbuild, Playwright (retained licenses in installed packages).
+- Official production publication through Rare Friends requires a separate review.

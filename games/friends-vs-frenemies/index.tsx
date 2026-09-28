@@ -1262,7 +1262,9 @@ export default function FriendsVsFrenemies({ friendId, client, paused }: GameCom
     if (run.bankRf < line.price) return;
     if (line.kind === "consumable") {
       if (!bankSpendRun(run, line.price)) return;
-      run.cons[line.id] = (run.cons[line.id] ?? 0) + 1;
+      // Catalog ids are c-prefixed (c-heal); runtime belt/use keys are bare.
+      const cid = line.id.replace(/^c-/, "");
+      run.cons[cid] = (run.cons[cid] ?? 0) + 1;
     } else if (line.kind === "ability") {
       const aid = line.id as AbilityId;
       if (!ABILITIES[aid] || run.abilities.includes(aid)) return;
@@ -2079,13 +2081,14 @@ export default function FriendsVsFrenemies({ friendId, client, paused }: GameCom
   );
 
   // Item belt: stable order, hotkey caps, touch-friendly buttons.
-  const consBar = hud && (BELT_ORDER.filter(id => (hud.cons[id] ?? 0) > 0).slice(0, 4)).map((id, i) => {
-    const con = CONSUMABLES.find(c => c.id === id);
+  const consBar = hud && (BELT_ORDER.filter(id => (hud.cons[id] ?? hud.cons[`c-${id}`] ?? 0) > 0).slice(0, 4)).map((id, i) => {
+    const con = CONSUMABLES.find(c => c.id === id || c.id === `c-${id}`);
     if (!con) return null;
     const key = ITEM_HOTKEYS[i];
+    const n = hud.cons[id] ?? hud.cons[`c-${id}`] ?? 0;
     return (
       <button key={id} type="button" className="fvf-ab" onClick={() => doConsumable(id)} aria-label={`Use ${con.name} (${key})`} title={`${con.desc} · hotkey ${key}`}>
-        <span className="fvf-abkey"><em className="fvf-key">{key}</em><span className="fvf-ablabel">{con.name.split(" ").map(w => w[0]).join("")}×{hud.cons[id]}</span></span>
+        <span className="fvf-abkey"><em className="fvf-key">{key}</em><span className="fvf-ablabel">{con.name.split(" ").map(w => w[0]).join("")}×{n}</span></span>
       </button>
     );
   });

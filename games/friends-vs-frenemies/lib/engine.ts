@@ -1641,8 +1641,12 @@ export function heal(run: RunState): boolean {
 }
 
 /** Use a consumable from inventory (atomic: decrements only on success). */
-export function useConsumable(run: RunState, id: string): boolean {  if (run.over || run.frozen || run.shopOpen) return false;
-  if ((run.cons[id] ?? 0) <= 0) return false;
+export function useConsumable(run: RunState, rawId: string): boolean {
+  if (run.over || run.frozen || run.shopOpen) return false;
+  // Tolerate catalog-style c- ids (older purchases stored them verbatim).
+  const id = rawId.replace(/^c-/, "");
+  const key = (run.cons[id] ?? 0) > 0 ? id : rawId;
+  if ((run.cons[key] ?? 0) <= 0) return false;
   const [fx, fy] = friendPos(run);
   if (id === "heal") {
     if (run.hp >= run.maxHp) return false;
@@ -1668,7 +1672,7 @@ export function useConsumable(run: RunState, id: string): boolean {  if (run.ove
     run.furyT = 12;
     floater(run, fx, fy - 30, "RARE FURY!", "#e8823a", true);
   } else return false;
-  run.cons[id]--;
+  run.cons[key]--;
   run.events.push({ t: "heal" });
   return true;
 }
