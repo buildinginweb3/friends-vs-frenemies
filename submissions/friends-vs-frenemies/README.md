@@ -36,7 +36,7 @@ The selected Rare Friend remains the visual and gameplay focus throughout the en
 
 ## Source code
 
-[Source code](https://github.com/BUILDER-REPO-PLACEHOLDER/friends-vs-frenemies/tree/de09471b687c7416abc95f30b480c9f21625e072) · Final submission commit: `de09471b687c7416abc95f30b480c9f21625e072`
+[Source code](https://github.com/BUILDER-REPO-PLACEHOLDER/friends-vs-frenemies/tree/11dcb6a6bebb4094fe47a997f00beb527fb5f988) · Final submission commit: `11dcb6a6bebb4094fe47a997f00beb527fb5f988`
 
 > **SOURCE-URL NOTE FOR THE BUILDER:** this folder is not yet pushed to GitHub.
 > Push it, replace `BUILDER-REPO-PLACEHOLDER` above with the real repository URL,
@@ -47,7 +47,7 @@ Use Node.js 22+ on Linux or Ubuntu/WSL2.
 ```sh
 git clone https://github.com/BUILDER-REPO-PLACEHOLDER/friends-vs-frenemies.git
 cd friends-vs-frenemies
-git checkout de09471b687c7416abc95f30b480c9f21625e072
+git checkout 11dcb6a6bebb4094fe47a997f00beb527fb5f988
 npm ci
 npm run dev
 ```
